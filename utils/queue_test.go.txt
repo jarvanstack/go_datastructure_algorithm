@@ -1,0 +1,31 @@
+package utils
+
+import (
+	"fmt"
+	"testing"
+)
+//stack 数据.
+//100w 0.08 s
+//1000w (1.16s)
+//使用copy替代append 1000w  (0.62s)
+//使用*2替代25% append 1000w  (0.36s)
+//使用链表的话，复用性比较低，但是还是比较快的
+func TestQueue_Press(t *testing.T) {
+	queue := NewQueue()
+	for i := 0; i < 1000_0000; i++ {
+		queue.Push(i)
+	}
+	fmt.Printf("queue.length=%#v\n", queue.length)
+	fmt.Printf("queue.rear=%#v\n", queue.rear)
+	fmt.Printf("queue.top=%#v\n", queue.top)
+}
+
+func TestQueue_Push(t *testing.T) {
+	queue := NewQueue()
+	for i := 0; i < 4; i++ {
+		queue.Push(i)
+	}
+	for i := 0; i < 4; i++ {
+		fmt.Printf("queue.Pop()=%#v\n", queue.Pop())
+	}
+}
